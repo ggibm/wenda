@@ -1,6 +1,7 @@
 package com.nowcoder.wenda.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,9 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/")
+    @RequestMapping(path = {"/", "index"})
     @ResponseBody
     public String index() {
         return "Hello NowCoder";
     }
+
+    @RequestMapping(path = {"/profile/{groupId}/{userId}"})
+    @ResponseBody
+    public String profile(@PathVariable("userId") int userId,
+                          @PathVariable("groupId")  String groupId) {
+        return String.format("Profile Page of %s %d", groupId, userId);
+    }
+
 }
